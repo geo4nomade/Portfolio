@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<meta name="description" content="Portfolio d'Abdourazack Chakib Ali, géomaticien — cartographie, données géospatiales et analyse des risques.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a1216;
+    --bg-panel:#101c22;
+    --bg-panel-2:#0d1a1f;
+    --line:#22343c;
+    --line-strong:#2e434c;
+    --ochre:#c9963e;
+    --ochre-dim:#8f6c2f;
+    --teal:#4e8577;
+    --parchment:#ece4d3;
+    --muted:#7f939a;
+    --muted2:#7f939a;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--parchment);
+    font-family:'Source Serif 4', serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--ochre); color:#0a1216;}
+
+  a{color:var(--ochre); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--ochre); outline-offset:3px;}
+
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--ochre);
+  }
+
+  /* graticule background used across sections */
+  .graticule{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:.35;
+    pointer-events:none;
+  }
+  .vignette{
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 20%, transparent 0%, var(--bg-deep) 85%);
+    pointer-events:none;
+  }
+
+  section{position:relative; padding:0 6vw;}
+  .wrap{max-width:980px; margin:0 auto; position:relative;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .wrap{padding-top:6vh; padding-bottom:6vh;}
+  .hero-grid{
+    display:flex; align-items:center; gap:4vw; justify-content:space-between;
+  }
+  .hero-text{flex:1; min-width:0;}
+ 
+  
+ @media (max-width:720px){
+    .hero-grid{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+  
+  .geo-tag{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.05em;
+    color:var(--muted2);
+    border:1px solid var(--line-strong);
+    padding:6px 12px;
+    border-radius:var(--radius);
+    margin-bottom:2.2rem;
+  }
+  .geo-tag .dot{width:6px; height:6px; border-radius:50%; background:var(--ochre); box-shadow:0 0 8px var(--ochre);}
+  h1.name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(2.4rem, 7vw, 5rem);
+    line-height:1.02;
+    letter-spacing:-.01em;
+    margin:0 0 .6rem 0;
+    color:var(--parchment);
+  }
+  .role{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+    font-size:clamp(1.05rem, 2.4vw, 1.4rem);
+    color:var(--teal);
+    margin:0 0 2rem 0;
+  }
+  .hero p.lede{
+    max-width:640px;
+    font-size:1.15rem;
+    color:#c9c1af;
+    font-style:italic;
+  }
+  .scroll-cue{
+    margin-top:3.5rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--muted2);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .scroll-cue .arrow{display:inline-block; animation:bob 1.8s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);}}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{
+    display:flex; align-items:baseline; gap:1rem;
+    margin-bottom:2.5rem;
+    padding-top:5.5rem;
+  }
+  .section-head h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.6rem;
+    font-weight:600;
+    margin:0;
+    color:var(--parchment);
+  }
+  .section-head .rule{flex:1; height:1px; background:var(--line-strong);}
+  section.block{border-bottom:1px solid var(--line); padding-bottom:5rem;}
+
+  /* ---------- ABOUT ---------- */
+  .about-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    padding:2.2rem 2.4rem;
+    position:relative;
+  }
+  .about-card::before{
+    content:"";
+    position:absolute; top:0; left:0; bottom:0; width:3px;
+    background:var(--ochre);
+  }
+  .about-card p{margin:0 0 1.1rem 0; color:#d9d2c1;}
+  .about-card p:last-child{margin-bottom:0;}
+  .objective{
+    margin-top:1.6rem; padding-top:1.4rem; border-top:1px dashed var(--line-strong);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.85rem; color:var(--teal); line-height:1.7;
+  }
+  .objective b{color:var(--ochre); text-transform:uppercase; letter-spacing:.1em; font-size:.75rem;}
+
+  /* ---------- FORMATIONS ---------- */
+  .stamp-row{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:1.5rem;
+    padding:1.6rem 0;
+    border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .stamp-row:last-child{border-bottom:1px solid var(--line);}
+  .coord{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.95rem;
+    color:var(--ochre);
+    white-space:nowrap;
+  }
+  .coord .city{
+    display:block; font-size:.75rem; color:var(--muted2); margin-top:.3rem; text-transform:uppercase; letter-spacing:.06em;
+  }
+  .degree h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.1rem; font-weight:600; margin:0 0 .3rem 0; color:var(--parchment);
+  }
+  .degree p{margin:0; color:var(--muted2); font-size:.95rem;}
+
+  /* ---------- PROJECTS ---------- */
+  .projects-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:1.4rem;
+  }
+  .sheet{
+    background:var(--bg-panel-2);
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    padding:1.8rem;
+    display:flex; flex-direction:column; gap:1rem;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .sheet:hover{transform:translateY(-4px); border-color:var(--ochre-dim);}
+  .sheet-id{
+    font-family:'IBM Plex Mono', monospace; font-size:.75rem; color:var(--muted2);
+    display:flex; justify-content:space-between;
+  }
+  .sheet h3{
+    font-family:'Space Grotesk', sans-serif; font-size:1.25rem; margin:0; color:var(--parchment);
+  }
+  .sheet p{margin:0; color:#c9c1af; font-size:.96rem; flex:1;}
+  .tags{display:flex; flex-wrap:wrap; gap:.5rem;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:.72rem;
+    color:var(--teal); border:1px solid var(--line-strong); padding:.2rem .55rem; border-radius:20px;
+  }
+  .sheet-link{
+    font-family:'IBM Plex Mono', monospace; font-size:.85rem;
+    color:var(--ochre); display:inline-flex; align-items:center; gap:.4rem;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display:flex; flex-wrap:wrap; gap:1rem 2.5rem; align-items:baseline;
+  }
+  .contact-link{
+    font-family:'Space Grotesk', sans-serif; font-size:1.1rem; font-weight:500;
+    color:var(--parchment); border-bottom:1px solid var(--line-strong); padding-bottom:2px;
+  }
+  .contact-link:hover{color:var(--ochre); border-color:var(--ochre); text-decoration:none;}
+
+  footer{
+    padding:3rem 6vw 2.5rem;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+    font-family:'IBM Plex Mono', monospace; font-size:.78rem; color:var(--muted2);
+  }
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    .scroll-cue .arrow{animation:none;}
+  }
+
+  @media (max-width:720px){
+    .stamp-row{grid-template-columns:1fr;}
+    .projects-grid{grid-template-columns:1fr;}
+    section{padding:0 6vw;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="graticule"></div>
+  <div class="vignette"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="geo-tag"><span class="dot"></span><span id="hero-coord" class="mono">N11°35'20" E043°08'44"</span><span>&nbsp;— Djibouti</span></div>
+        <h1 class="name">Abdourazack&nbsp;Chakib&nbsp;Ali</h1>
+        <p class="role">Géomaticien </p>
+        <p class="lede">👋 Salut à tous, et bienvenue sur mon portfolio. Jeune géomaticien, je suis toujours à la recherche de nouvelles façons d'exploiter la puissance des données géospatiales pour mieux comprendre les enjeux de demain.</p>
+        <span class="scroll-cue">explorer <span class="arrow">↓</span></span>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">01</span><h2>À propos</h2><div class="rule"></div></div>
+    <div class="about-card reveal">
+      <p>Je m'appelle Abdourazack Chakib Ali, jeune géomaticien, toujours à la recherche de nouvelles façons d'exploiter la puissance des données géospatiales.</p>
+      <p>À travers ce portfolio, je présente quelques projets et analyses que j'ai réalisés, entre apprentissage et mise en pratique concrète. Bonne exploration, et merci de votre visite.</p>
+      <div class="objective">
+        <b>Objectif</b><br>
+        Utiliser la cartographie et les données géospatiales pour mieux comprendre les enjeux de demain, anticiper les risques et appuyer la prise de décision.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATIONS -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">02</span><h2>Formations académiques</h2><div class="rule"></div></div>
+
+    <div class="stamp-row reveal">
+      <div class="coord">N07°19'26" E013°34'54"<span class="city">Ngaoundéré, Cameroun</span></div>
+      <div class="degree">
+        <h3>Master 2 — Géomatique, Aménagement et Gestion des Ressources</h3>
+        <p>Université de Ngaoundéré</p>
+      </div>
+    </div>
+
+    <div class="stamp-row reveal">
+      <div class="coord">N14°41'44" W017°26'50"<span class="city">Dakar, Sénégal</span></div>
+      <div class="degree">
+        <h3>Master 1 — Géosciences</h3>
+        <p>Institut de Géosciences de Dakar</p>
+      </div>
+    </div>
+
+    <div class="stamp-row reveal">
+      <div class="coord">N11°35'20" E043°08'44"<span class="city">Djibouti</span></div>
+      <div class="degree">
+        <h3>Licence — Géologie</h3>
+        <p>Université de Djibouti</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">03</span><h2>Projets</h2><div class="rule"></div></div>
+    <div class="projects-grid" id="projects-grid"><!-- généré par JS depuis la liste PROJECTS ci-dessous --></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="block" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">04</span><h2>Contact</h2><div class="rule"></div></div>
+    <div class="contact-grid reveal">
+      <a class="contact-link" href="mailto:abdourazackchakibali@gmail.com">abdourazackchakibali@gmail.com</a>
+      
+      <!-- Ajoute ici tes autres liens : LinkedIn, etc. -->
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Abdourazack Chakib Ali</span>
+  <span class="mono">DATUM WGS84</span>
+</footer>
+
+<script>
+  // ==========================================================
+  // TES PROJETS — pour en ajouter un, copie un bloc {...} et
+  // modifie les valeurs. L'ordre ici = l'ordre affiché.
+  // ==========================================================
+  const PROJECTS = [
+    {
+      sheet: "Project 01",
+      kind: "JS · DATAVIZ",
+      title: "putch",
+      description: "Exploration cartographique des coups d'État en Afrique de 1960 à 2022 : mise en données et visualisation d'une chronologie continentale pour repérer les dynamiques et les foyers d'instabilité.",
+      tags: ["JavaScript", "Afrique", "Séries temporelles"],
+      url: "https://github.com/geo4nomade/putch"
+    },
+    {
+      sheet: "Project 02",
+      kind: "HTML · GÉOSTRATÉGIE",
+      title: "chokepoints-maritime",
+      description: "Cartographie des points de passage maritimes stratégiques (détroits, canaux) où se concentrent les flux commerciaux mondiaux et les risques géopolitiques associés.",
+      tags: ["HTML", "Routes maritimes", "Risque"],
+      url: "https://github.com/geo4nomade/chokepoints-maritime"
+    },
+    {
+      sheet: "Project 03",
+      kind: "KOBO · COLLECTE",
+      title: "Collecte de données KoboToolbox",
+      description: "Projet de collecte de données de terrain développé avec KoboToolbox. Ce formulaire permet la saisie d'informations géolocalisées pour des analyses SIG et la cartographie.",
+      tags: ["KoboToolbox", "SIG", "Collecte", "GPS"],
+      url: "https://ee.kobotoolbox.org/x/obOtZcui"
+    }
+    // Ajoute un nouveau projet ici, par exemple :
+    // {
+    //   sheet: "FEUILLE 03",
+    //   kind: "PYTHON · SIG",
+    //   title: "nom-du-depot",
+    //   description: "Description courte du projet.",
+    //   tags: ["Python", "QGIS"],
+    //   url: "https://github.com/geo4nomade/nom-du-depot"
+    // },
+  ];
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  const grid = document.getElementById('projects-grid');
+  grid.innerHTML = PROJECTS.map(p => `
+    <div class="sheet reveal">
+      <div class="sheet-id"><span>${escapeHtml(p.sheet)}</span><span>${escapeHtml(p.kind)}</span></div>
+      <h3>${escapeHtml(p.title)}</h3>
+      <p>${escapeHtml(p.description)}</p>
+      <div class="tags">${p.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
+      <a class="sheet-link" href="${p.url}" target="_blank" rel="noopener">voir le dépôt →</a>
+    </div>
+  `).join('');
+
+  // reveal-on-scroll (inclut les cartes projets générées ci-dessus)
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  els.forEach(el=>io.observe(el));
+
+  // hero coordinate "GPS lock" animation on load
+  const target = "N11°35'20\" E043°08'44\"";
+  const coordEl = document.getElementById('hero-coord');
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const chars = "0123456789";
+    let frame = 0;
+    const totalFrames = 18;
+    const timer = setInterval(()=>{
+      frame++;
+      if(frame >= totalFrames){ coordEl.textContent = target; clearInterval(timer); return; }
+      let out = "";
+      for(const ch of target){
+        if(/[0-9]/.test(ch) && Math.random() > frame/totalFrames){
+          out += chars[Math.floor(Math.random()*chars.length)];
+        } else out += ch;
+      }
+      coordEl.textContent = out;
+    }, 60);
+  }
+</script>
+
+</body>
+</html>
