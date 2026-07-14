@@ -75,7 +75,7 @@
     overflow:hidden;
     border-bottom:1px solid var(--line);
   }
-  .hero .wrap{padding-top:6vh; padding-bottom:6vh;}
+  .hero .wrap{padding-top:calc(6vh + 70px); padding-bottom:6vh;}
   .hero-grid{
     display:flex; align-items:center; gap:4vw; justify-content:space-between;
   }
@@ -134,6 +134,46 @@
   .scroll-cue .arrow{display:inline-block; animation:bob 1.8s ease-in-out infinite;}
   @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);}}
 
+  /* ---------- NAV ---------- */
+.topnav{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.2rem 6vw;
+  background:rgba(10,18,22,.85);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.topnav-brand{
+  font-size:.95rem;
+  letter-spacing:.1em;
+  color:var(--parchment);
+  text-decoration:none;
+}
+.topnav-links{
+  display:flex;
+  gap:2rem;
+}
+.topnav-links a{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.8rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:var(--muted2);
+  text-decoration:none;
+  transition:color .2s ease;
+}
+.topnav-links a:hover{
+  color:var(--ochre);
+}
+@media (max-width:720px){
+  .topnav-links{ gap:1.2rem; }
+  .topnav{ padding:1rem 6vw; }
+}
+
   /* ---------- SECTION HEADERS ---------- */
   .section-head{
     display:flex; align-items:baseline; gap:1rem;
@@ -148,7 +188,7 @@
     color:var(--parchment);
   }
   .section-head .rule{flex:1; height:1px; background:var(--line-strong);}
-  section.block{border-bottom:1px solid var(--line); padding-bottom:5rem;}
+  section.block{border-bottom:1px solid var(--line); padding-bottom:5rem; scroll-margin-top:90px;}
 
   /* ---------- ABOUT ---------- */
   .about-card{
@@ -262,6 +302,23 @@
 </head>
 <body>
 
+<!-- NAV -->
+<nav class="topnav">
+  <a href="#" class="topnav-brand mono">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px; margin-right:6px;">
+    <circle cx="12" cy="12" r="10" stroke="var(--ochre)" stroke-width="1.2"/>
+    <path d="M12 3 L12 21 M3 12 L21 12" stroke="var(--ochre)" stroke-width="0.8" opacity="0.5"/>
+    <path d="M12 5 L15 12 L12 19 L9 12 Z" fill="var(--ochre)"/>
+  </svg>A.CHAKIB ALI
+</a>
+  <div class="topnav-links">
+    <a href="#about">À propos</a>
+    <a href="#formations">Formations</a>
+    <a href="#projets">Projets</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
 <!-- HERO -->
 <section class="hero">
   <div class="graticule"></div>
@@ -281,7 +338,8 @@
 </section>
 
 <!-- ABOUT -->
-<section class="block">
+
+<section class="block" id="about">
   <div class="wrap">
     <div class="section-head reveal"><span class="eyebrow">01</span><h2>À propos</h2><div class="rule"></div></div>
     <div class="about-card reveal">
@@ -296,7 +354,7 @@
 </section>
 
 <!-- FORMATIONS -->
-<section class="block">
+<section class="block" id="formations">
   <div class="wrap">
     <div class="section-head reveal"><span class="eyebrow">02</span><h2>Formations académiques</h2><div class="rule"></div></div>
 
@@ -327,7 +385,7 @@
 </section>
 
 <!-- PROJETS -->
-<section class="block">
+<section class="block" id="projets">
   <div class="wrap">
     <div class="section-head reveal"><span class="eyebrow">03</span><h2>Projets</h2><div class="rule"></div></div>
     <div class="projects-grid" id="projects-grid"><!-- généré par JS depuis la liste PROJECTS ci-dessous --></div>
@@ -335,12 +393,13 @@
 </section>
 
 <!-- CONTACT -->
-<section class="block" style="border-bottom:none;">
+<section class="block" id="contact" style="border-bottom:none;">
   <div class="wrap">
     <div class="section-head reveal"><span class="eyebrow">04</span><h2>Contact</h2><div class="rule"></div></div>
     <div class="contact-grid reveal">
-      <a class="contact-link" href="mailto:abdourazackchakibali@gmail.com">abdourazackchakibali@gmail.com</a>
-      
+  <a class="contact-link" href="mailto:abdourazackchakibali@gmail.com">abdourazackchakibali@gmail.com</a>
+  <a class="contact-link" href="https://www.linkedin.com/in/abdourazack-chakib-ali-0b5bb4173" target="_blank" rel="noopener">LinkedIn</a>
+</div>
       <!-- Ajoute ici tes autres liens : LinkedIn, etc. -->
     </div>
   </div>
