@@ -161,6 +161,7 @@
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:1rem;
   padding:1.2rem 6vw;
   background:rgba(248,245,238,.85);
   backdrop-filter:blur(8px);
@@ -171,11 +172,16 @@
   letter-spacing:.1em;
   color:var(--ink);
   text-decoration:none;
+  flex:0 0 auto;
 }
 .topnav-links{
   display:flex;
   gap:2rem;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
 }
+.topnav-links::-webkit-scrollbar{ display:none; }
 .topnav-links a{
   font-family:Cambria, Georgia, 'Times New Roman', serif;
   font-size:.8rem;
@@ -184,13 +190,16 @@
   color:var(--muted);
   text-decoration:none;
   transition:color .2s ease;
+  white-space:nowrap;
+  flex:0 0 auto;
 }
 .topnav-links a:hover{
   color:var(--summit);
 }
 @media (max-width:720px){
-  .topnav-links{ gap:1.2rem; }
+  .topnav-links{ gap:1rem; }
   .topnav{ padding:1rem 6vw; }
+  .topnav-links a{ font-size:.75rem; }
 }
 
   /* ---------- SECTION HEADERS ---------- */
@@ -513,12 +522,11 @@
       </div>
       <div class="service-card">
         <h3>Développement WebGIS</h3>
-        <p>Cartes interactives sur mesure avec Leaflet.js</p>
+        <p>Cartes interactives et applications géospatiales sur mesure avec Leaflet.js, Node.js et Supabase.</p>
       </div>
       <div class="service-card">
-        <h3>Formation QGIS et PostGIS</h3>
-        <p>Accompagnement du niveau débutant à expert : prise en main et analyses avancées sous QGIS.</p>
-        <p>Initiation à PostGIS et à son intégration dans QGIS : modélisation de bases de données spatiales, requêtes SQL géographiques et connexion aux couches pour l'analyse et la cartographie.</p>
+        <h3>Formation QGIS</h3>
+        <p>Accompagnement du niveau débutant à expert : prise en main, automatisation et analyses avancées sous QGIS.</p>
       </div>
     </div>
   </div>
